@@ -7,8 +7,24 @@ a { color: inherit; text-decoration: none; }
 button, a, summary { -webkit-tap-highlight-color: transparent; }
 :focus-visible { outline: 2px solid #555; outline-offset: 6px; }
 .sidebar { position: fixed; inset: 0 auto 0 0; width: 31%; padding: 64px 4.5%; border-right: 1px solid #e6e6e2; display: flex; flex-direction: column; }
-.brand { display: block; width: fit-content; font-size: clamp(30px, 3vw, 49px); font-weight: 700; line-height: .99; letter-spacing: -.065em; }
+.brand { display: block; width: fit-content; font-size: clamp(30px, 3.4vw, 56px); font-weight: 700; line-height: .99; letter-spacing: -.065em; }
+.brand-line { display: block; overflow: hidden; padding: .13em .08em .14em 0; margin-bottom: -.14em; white-space: nowrap; }
+.brand-letter { display: inline-block; animation: brand-reveal 850ms cubic-bezier(.22, 1, .36, 1) both; animation-delay: calc(var(--letter-index) * 45ms + 100ms); }
+.brand-glyph { display: inline-block; }
 .brand-dot { color: #92928b; }
+@keyframes brand-reveal {
+  from { opacity: 0; transform: translateY(110%) rotate(4deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+@keyframes brand-wave {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-.09em); }
+  70% { transform: translateY(.025em); }
+}
+@media (hover: hover) and (pointer: fine) {
+  .brand:hover .brand-glyph { animation: brand-wave 650ms ease-in-out both; animation-delay: calc(var(--letter-index) * 32ms); }
+}
+.brand:focus-visible .brand-glyph { animation: brand-wave 650ms ease-in-out both; animation-delay: calc(var(--letter-index) * 32ms); }
 .navigation { margin-top: 76px; display: flex; flex-direction: column; gap: 20px; max-width: 225px; }
 .nav-link { display: flex; align-items: center; gap: 17px; font-size: 10px; letter-spacing: .09em; }
 .nav-number { font-size: 8px; color: #999; letter-spacing: 0; }
@@ -28,4 +44,4 @@ button, a, summary { -webkit-tap-highlight-color: transparent; }
 @media (min-width: 1600px) { .main-area { max-width: 1200px; } }
 @media (max-width: 767px) { .sidebar { position: static; width: auto; padding: 40px 7% 28px; border-right: 0; } .brand { font-size: clamp(52px, 13vw, 82px); } .navigation { margin-top: 35px; max-width: none; flex-direction: row; flex-wrap: wrap; gap: 16px 23px; } .nav-link { font-size: 9px; } .nav-number, .nav-arrow, .sidebar-bottom { display: none; } .main-area { margin-left: 0; padding: 28px 7% 0; } .intro { padding-bottom: 45px; } .detail-section { margin-top: 72px; } }
 @media (max-width: 639px) { .work-image { aspect-ratio: 1.25; } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }

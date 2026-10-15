@@ -1,3 +1,4 @@
+import { Brand } from '@/components/brand';
 import { portfolioWorks } from '@/lib/portfolio';
 import { WorkGallery } from '@/components/work-gallery';
 const links = [['WORKS', 'works'], ['ABOUT', 'about'], ['SERVICES & FEES', 'services'], ['PROCESS', 'process'], ['FAQ', 'faq'], ['CONTACT', 'contact']];
@@ -6,7 +7,7 @@ export default function Home() {
   return <>
     <a className="skip-link" href="#main">本文へスキップ</a>
     <aside className="sidebar">
-      <a href="#" aria-label="SAZANAMI TOKYO ホーム" className="brand">SAZANAMI<br />TOKYO<span className="brand-dot">.</span></a>
+      <Brand />
       <p className="mt-5 text-[11px] leading-6 tracking-[.08em] text-neutral-500">Information Architecture<br />Diagram / Infographic Design</p>
       <nav aria-label="メインナビゲーション" className="navigation">{links.map(([label, id], i) => <a key={id} href={`#${id}`} className="nav-link"><span className="nav-number">0{i + 1}</span>{label}<span className="nav-arrow">↗</span></a>)}</nav>
       <div className="sidebar-bottom"><span className="flex items-center gap-2 text-[10px] tracking-widest"><span className="h-1.5 w-1.5 rounded-full bg-neutral-400" /> TOKYO, JAPAN</span><p className="mt-5 text-[9px] tracking-wider text-neutral-400">© {new Date().getFullYear()} SAZANAMI TOKYO</p></div>
