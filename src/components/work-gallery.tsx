@@ -3,7 +3,7 @@ import { WorkImage } from './work-image';
 
 export function WorkGallery({ works }: { works: PortfolioWork[] }) {
   return <div className="grid grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2">
-    {works.map((work, i) => <article key={work.id} className="group min-w-0">
+    {works.map((work, i) => <article key={work.id} data-reveal="work" data-delay={i % 2 * 100} className="group min-w-0">
       <div className="work-image"><WorkImage src={work.image} title={work.title} /></div>
       <div className="mt-5 flex gap-3">
         <span className="pt-0.5 text-[9px] tabular-nums text-neutral-400">{String(i + 1).padStart(2, '0')}</span>
