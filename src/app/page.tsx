@@ -1,9 +1,8 @@
-import { getWorks } from '@/lib/notion';
-import { WorkImage } from '@/components/work-image';
-export const dynamic = 'force-dynamic';
+import { portfolioWorks } from '@/lib/portfolio';
+import { WorkGallery } from '@/components/work-gallery';
 const links = [['WORKS', 'works'], ['ABOUT', 'about'], ['SERVICES & FEES', 'services'], ['PROCESS', 'process'], ['FAQ', 'faq'], ['CONTACT', 'contact']];
-export default async function Home() {
-  const { works, status } = await getWorks();
+export default function Home() {
+  const works = portfolioWorks;
   return <>
     <a className="skip-link" href="#main">本文へスキップ</a>
     <aside className="sidebar">
@@ -15,9 +14,9 @@ export default async function Home() {
     <main id="main" className="main-area">
       <section id="works" className="scroll-mt-8">
         <header className="intro"><div className="flex items-center justify-between text-[10px] tracking-[.16em] text-neutral-500"><p>INFORMATION INTO UNDERSTANDING.</p><span className="hidden sm:block">PORTFOLIO / 2026</span></div><h1 className="mt-14 text-[clamp(27px,2.6vw,42px)] font-medium leading-[1.8] tracking-[.09em]">複雑をほどき、<br />伝わるかたちへ。</h1><p className="mt-5 text-xs leading-7 tracking-[.06em] text-neutral-500">情報を整理し、本質を見つける。<br />図解とデザインで、理解のきっかけをつくります。</p></header>
-        <div className="mb-7 flex items-center justify-between border-t border-neutral-200 pt-5"><h2 className="text-[11px] tracking-[.18em]">SELECTED WORKS <span className="ml-2 text-neutral-400">({String(works.length).padStart(2, '0')})</span></h2><span className="text-[9px] tracking-widest text-neutral-400">{status === 'demo' ? 'CONCEPT COLLECTION' : 'DESIGN ARCHIVE'}</span></div>
-        {status === 'demo' && <p className="mb-6 text-[11px] leading-6 text-neutral-500">以下はデザイン確認用の自主制作サンプルです。実際のクライアント実績ではありません。</p>}
-        {status === 'error' ? <p role="status" className="py-14 text-sm leading-8 text-neutral-500">作品を読み込めませんでした。時間をおいて再度お試しください。</p> : works.length === 0 ? <p className="py-14 text-sm text-neutral-500">公開中の作品はありません。</p> : <div className="grid grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2">{works.map((work, i) => <article key={work.id} className="group"><div className="work-image"><WorkImage src={work.image} title={work.title} /></div><div className="mt-5 flex gap-3"><span className="pt-0.5 text-[9px] tabular-nums text-neutral-400">{String(i + 1).padStart(2, '0')}</span><div><h3 className="text-[12px] font-medium leading-6 tracking-[.035em]">{work.title}</h3><p className="mt-1 text-[9px] leading-5 tracking-[.04em] text-neutral-500">{[work.client, work.category].filter(Boolean).join(' / ')}</p></div></div></article>)}</div>}
+        <div className="mb-7 flex items-center justify-between border-t border-neutral-200 pt-5"><h2 className="text-[11px] tracking-[.18em]">SELECTED WORKS <span className="ml-2 text-neutral-400">({String(works.length).padStart(2, '0')})</span></h2><span className="text-[9px] tracking-widest text-neutral-400">INDEPENDENT PROJECTS</span></div>
+        <p className="mb-6 text-[11px] leading-6 text-neutral-500">掲載作品はすべて、架空の案件を想定して制作した自主制作です。実際のクライアントからのご依頼実績ではありません。</p>
+        <WorkGallery works={works} />
       </section>
       <section id="about" className="detail-section"><p className="eyebrow">02 / ABOUT</p><h2 className="section-title">情報と、人のあいだに。</h2><p className="body-copy">SAZANAMI TOKYO は、情報設計・図解を軸とするデザインスタジオです。<br />伝えたいことを丁寧にひもとき、読み手に届く順序と表現を考えます。<br />小さな理解が、次の行動につながるデザインを目指しています。</p></section>
       <section id="services" className="detail-section"><p className="eyebrow">03 / SERVICES & FEES</p><h2 className="section-title">伝える目的から、考える。</h2><div className="mt-8">{[['01', '情報設計・構成', '資料やコンテンツの整理、伝達順序の設計。'], ['02', '図解・インフォグラフィック', '仕組みや関係性、データを視覚化。'], ['03', '資料・スライドデザイン', '企画書、提案資料、サービス紹介のデザイン。']].map(([n,t,d]) => <div key={n} className="service-row"><span className="text-[10px] text-neutral-400">{n}</span><div><h3 className="text-sm">{t}</h3><p className="mt-2 text-xs leading-6 text-neutral-500">{d}</p></div><span className="text-[10px] text-neutral-500">個別お見積り</span></div>)}</div><p className="mt-5 text-xs leading-7 text-neutral-500">料金は内容・点数・納期により異なります。ご相談内容を確認後、お見積りします。</p></section>
