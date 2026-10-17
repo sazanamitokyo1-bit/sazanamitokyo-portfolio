@@ -8,8 +8,8 @@ const { portfolioWorks } = await import(`data:text/javascript;base64,${Buffer.fr
 test('all supplied images are present, grouped and ordered for the portfolio', () => {
   assert.deepEqual(portfolioWorks.map(w => w.category), ['スライドデザイン','スライドデザイン','Instagramフィードデザイン','X図解','X図解','X図解']);
   const images = portfolioWorks.flatMap(w => w.images);
-  assert.equal(images.length, 11);
-  assert.equal(new Set(images).size, 11);
+  assert.equal(images.length, 15);
+  assert.equal(new Set(images).size, 15);
   portfolioWorks.forEach((w,i) => {
     assert.equal(w.order, i+1); assert.equal(w.client, ''); assert.ok(w.title);
     assert.ok(w.images.includes(w.image));
