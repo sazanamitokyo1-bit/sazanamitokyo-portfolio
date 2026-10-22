@@ -39,3 +39,7 @@ npm start
 Notion連携を将来再利用する場合は `getWorks()` をページから呼び出すように変更し、`NOTION_API_KEY` と `NOTION_DATABASE_ID` を安全に設定してください。データベースは Title（タイトル）、Category（セレクト等）、Client（テキスト）、Image（ファイルまたはURL）、Published（チェックボックス）、Order（数値）が必要です。APIキーをコミットしないでください。
 
 CONTACT にはメール・X・Instagram へのリンクを掲載しています。連絡先の編集は `src/app/page.tsx` で行います。ABOUT・サービス・制作プロセス・FAQ は公開前に内容をご確認ください。Vercelの Framework Preset は Next.js、Root Directory はリポジトリ直下、各コマンドと出力先は標準設定を使用します。
+
+## 自動チェックと通知
+
+GitHub ActionsでPush/PR/毎週のビルド・テスト・依存監査・CodeQLを実行し、Dependabotが更新PRを作成します。メール通知には所有者のGitHub設定が必要です。[セキュリティ運用手順](docs/security-operations.md)を参照してください。公開サイトの死活監視は未設定です。
