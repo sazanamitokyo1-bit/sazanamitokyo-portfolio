@@ -6,10 +6,10 @@ const source = readFileSync(new URL('../src/lib/portfolio.ts', import.meta.url),
 const js = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext } }).outputText;
 const { portfolioWorks } = await import(`data:text/javascript;base64,${Buffer.from(js).toString('base64')}`);
 test('all supplied images are present, grouped and ordered for the portfolio', () => {
-  assert.deepEqual(portfolioWorks.map(w => w.category), ['スライドデザイン','スライドデザイン','Instagramフィードデザイン','X図解','X図解','X図解']);
+  assert.deepEqual(portfolioWorks.map(w => w.category), ['スライドデザイン','スライドデザイン','スライドデザイン','Instagramフィードデザイン','X図解','X図解','X図解']);
   const images = portfolioWorks.flatMap(w => w.images);
-  assert.equal(images.length, 18);
-  assert.equal(new Set(images).size, 18);
+  assert.equal(images.length, 28);
+  assert.equal(new Set(images).size, 28);
   portfolioWorks.forEach((w,i) => {
     assert.equal(w.order, i+1); assert.equal(w.client, ''); assert.ok(w.title);
     assert.ok(w.images.includes(w.image));
