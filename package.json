@@ -16,7 +16,7 @@
     "server-only": "^0.0.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.0",
+    "@tailwindcss/postcss": "^4.3.4",
     "tailwindcss": "^4.1.0",
     "typescript": "^5.9.0",
     "@types/node": "^24.0.0",
