@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react';
+import { PointerRipples } from '@/components/pointer-ripples';
 import { PageMotion } from '@/components/page-motion';
 import { Brand } from '@/components/brand';
 import { portfolioWorks } from '@/lib/portfolio';
@@ -6,11 +8,30 @@ const links = [['WORKS', 'works'], ['ABOUT', 'about'], ['SERVICES & FEES', 'serv
 export default function Home() {
   const works = portfolioWorks;
   return <>
+    <PointerRipples />
     <a className="skip-link" href="#main">本文へスキップ</a>
     <aside className="sidebar">
       <Brand />
       <p className="mt-5 text-[11px] leading-6 tracking-[.08em] text-neutral-500">Information Architecture<br />Diagram / Infographic Design</p>
-      <nav aria-label="メインナビゲーション" className="navigation">{links.map(([label, id], i) => <a key={id} href={`#${id}`} className="nav-link"><span className="nav-number">0{i + 1}</span>{label}<span className="nav-arrow">↗</span></a>)}</nav>
+      <nav aria-label="メインナビゲーション" className="navigation">
+        {links.map(([label, id], row) => (
+          <a key={id} href={`#${id}`} className="nav-link" aria-label={label}>
+            <span className="nav-number" aria-hidden="true">0{row + 1}</span>
+            <span className="nav-label" aria-hidden="true">
+              {Array.from(label).map((letter, column) => letter === ' ' ? ' ' : (
+                <span
+                  key={column}
+                  className="nav-letter"
+                  style={{ '--drop-delay': `${row * 65 + column * 27}ms` } as CSSProperties}
+                >
+                  <span className="nav-glyph">{letter}</span>
+                </span>
+              ))}
+            </span>
+            <span className="nav-arrow" aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </nav>
       <div className="sidebar-bottom"><span className="flex items-center gap-2 text-[10px] tracking-widest"><span className="h-1.5 w-1.5 rounded-full bg-neutral-400" /> TOKYO, JAPAN</span><p className="mt-5 text-[9px] tracking-wider text-neutral-400">© {new Date().getFullYear()} SAZANAMI TOKYO</p></div>
     </aside>
     <main id="main" className="main-area">
